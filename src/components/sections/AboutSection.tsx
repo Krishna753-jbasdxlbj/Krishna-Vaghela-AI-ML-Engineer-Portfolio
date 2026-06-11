@@ -44,6 +44,16 @@ export default function AboutSection() {
     }
   }, [aboutSectionRef]);
 
+  // Detect small screens to shrink the avatar particles so they don't cover
+  // the photo on mobile (mirrors the portfolio section's responsive sizing).
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => setIsSmallScreen(window.innerWidth < 640);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   // run animations only when trigger is ready
   useCircleTextAnimation(circleRef, textLeftRef, textRightRef, triggerEl);
   useAvatarAnimation(svgRef, triggerEl, [flowerRef1, flowerRef2, flowerRef3]);
@@ -127,7 +137,7 @@ export default function AboutSection() {
             <div key={i} ref={ref} className={`absolute ${position}`}>
               <Particle
                 variant={variant}
-                size={size}
+                size={isSmallScreen ? Math.round(size * 0.5) : size}
                 delay={0}
                 draggable={false}
               />
