@@ -34,10 +34,6 @@ export default function HeroSection() {
       className='relative flex items-center justify-center w-full h-screen overflow-hidden transition-opacity duration-500'
       style={{ opacity: ready ? 1 : 0 }}
     >
-      {/* Neural grid + glow backdrop */}
-      <div className='neural-bg' aria-hidden='true' />
-      <div className='neural-glow' aria-hidden='true' />
-
       {particles.map((p) => (
         <div
           key={p.id}

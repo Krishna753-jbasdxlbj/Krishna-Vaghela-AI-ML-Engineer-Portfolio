@@ -31,7 +31,7 @@ export const footerItems = {
       href='https://www.linkedin.com/in/krishna-vaghela7/'
       target='_blank'
       rel='noopener noreferrer'
-      className='underline hover:text-cyan-400 transition-colors'
+      className='underline hover:text-pink-300 transition-colors'
     >
       krishna vaghela
     </a>

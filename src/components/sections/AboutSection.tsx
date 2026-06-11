@@ -73,8 +73,8 @@ export default function AboutSection() {
         {/* Expanding Circle */}
         <div
           ref={circleRef}
-          className='circle rounded-full absolute left-1/2 top-[5%] -translate-x-1/2 z-0'
-          style={{ width: 40, height: 40, background: 'var(--surface)' }}
+          className='circle bg-neutral-100 rounded-full absolute left-1/2 top-[5%] -translate-x-1/2 z-0'
+          style={{ width: 40, height: 40 }}
         />
 
         {/* Text */}
@@ -118,7 +118,7 @@ export default function AboutSection() {
             <use
               href='#profilePath'
               fill='none'
-              stroke='#00d4ff80'
+              stroke='#303030c0'
               strokeWidth='10'
             />
           </svg>
@@ -136,7 +136,7 @@ export default function AboutSection() {
         </div>
 
         {/* Info */}
-        <div className='first text-center text-foreground z-2 md:max-w-[50vw] min-[320px]:max-w-[90vw] min-[320px]:-mt-3 md:mt-[25vh]'>
+        <div className='first text-center text-black z-2 md:max-w-[50vw] min-[320px]:max-w-[90vw] min-[320px]:-mt-3 md:mt-[25vh]'>
           <ul className='sm:text-xl min-[320px]:text-sm text-left leading-loose list-disc list-inside space-y-2 tracking-wide'>
             {aboutItems.map(({ label, value }, i) => (
               <li key={i}>

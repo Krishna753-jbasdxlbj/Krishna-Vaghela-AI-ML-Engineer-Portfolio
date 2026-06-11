@@ -7,6 +7,7 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isDown, setIsDown] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(pointer: coarse)');
@@ -36,18 +37,27 @@ export default function CustomCursor() {
       }
     };
     const onOut = () => setIsHovering(false);
+    const onDown = () => setIsDown(true);
+    const onUp = () => setIsDown(false);
 
     document.addEventListener('mouseover', onOver);
     document.addEventListener('mouseout', onOut);
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('mouseup', onUp);
 
     return () => {
       document.documentElement.style.cursor = '';
       document.removeEventListener('mouseover', onOver);
       document.removeEventListener('mouseout', onOut);
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('mouseup', onUp);
     };
   }, [isMobile]);
 
   if (isMobile) return null;
+
+  // physics scale: shrink on press, expand on hover, springs back on release
+  const scale = isDown ? 0.82 : isHovering ? 1.25 : 1;
 
   return (
     <div
@@ -55,42 +65,43 @@ export default function CustomCursor() {
       className='pointer-events-none fixed top-0 left-0 z-[9999] select-none'
       style={{ width: 58, height: 60, willChange: 'transform' }}
     >
-      {/* Glow ring */}
+      {/* Scale layer — parent does the physics translate; the back-out easing
+          gives the elastic overshoot when the press is released. */}
       <div
-        className='absolute inset-0 rounded-full'
+        className='relative w-full h-full'
         style={{
-          boxShadow: isHovering
-            ? '0 0 0 7px rgba(0,212,255,0.22), 0 0 28px 6px rgba(0,212,255,0.2)'
-            : '0 0 0 1.5px rgba(0,212,255,0.28)',
-          transition: 'box-shadow 0.2s ease',
+          transform: `scale(${scale})`,
+          transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          willChange: 'transform',
         }}
-      />
+      >
+        {/* Robot hand cursor — gold tint, sharp (no glow/drop-shadow). Hover
+            brightens the gold for the color shift. */}
+        <img
+          src='/robot_hand.svg'
+          alt=''
+          draggable={false}
+          className='w-full h-full object-contain'
+          style={{
+            filter: isHovering
+              ? 'invert(1) sepia(1) saturate(3) brightness(1.2)'
+              : 'invert(1) sepia(1) saturate(3) brightness(0.95)',
+            transition: 'filter 0.2s ease',
+          }}
+        />
 
-      {/* Robot image */}
-      <img
-        src='/robot-glow.png'
-        alt=''
-        draggable={false}
-        className='w-full h-full object-contain'
-        style={{
-          filter: isHovering
-            ? 'drop-shadow(0 0 10px rgba(0,212,255,0.75)) brightness(1.12)'
-            : 'drop-shadow(0 2px 6px rgba(5,8,16,0.6))',
-          transition: 'filter 0.2s ease',
-        }}
-      />
-
-      {/* Hotspot dot */}
-      <div
-        className='absolute bg-[#00d4ff] rounded-full'
-        style={{
-          width: 5,
-          height: 5,
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
+        {/* Hotspot dot */}
+        <div
+          className='absolute bg-[#FACF71] rounded-full'
+          style={{
+            width: 5,
+            height: 5,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      </div>
     </div>
   );
 }

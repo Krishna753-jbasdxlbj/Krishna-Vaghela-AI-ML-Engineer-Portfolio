@@ -51,7 +51,7 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.08 }}
           transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
-          className='fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050810] overflow-hidden'
+          className='fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#171717] overflow-hidden'
         >
           {/* Subtle grid background */}
           <div
@@ -73,9 +73,9 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
               style={{ width: 280, height: 280 }}
               animate={{
                 boxShadow: [
-                  '0 0 40px 0px rgba(0,212,255,0.08)',
-                  '0 0 80px 10px rgba(0,212,255,0.22)',
-                  '0 0 40px 0px rgba(0,212,255,0.08)',
+                  '0 0 40px 0px rgba(255,255,255,0.06)',
+                  '0 0 80px 10px rgba(255,255,255,0.16)',
+                  '0 0 40px 0px rgba(255,255,255,0.06)',
                 ],
               }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -84,9 +84,10 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
             {/* Robot image wrapper */}
             <div className='relative w-48 h-48 md:w-56 md:h-56 flex items-center justify-center'>
               <motion.img
-                src='/robot-glow.png'
+                src='/robot_icon.svg'
                 alt='KTV Robot'
                 className='w-full h-full object-contain relative z-10'
+                style={{ filter: 'brightness(0) invert(1)' }}
                 initial={{ opacity: 0, scale: 0.75, y: 16 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
@@ -98,8 +99,8 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
                 style={{
                   height: 2,
                   background:
-                    'linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent)',
-                  boxShadow: '0 0 12px 4px rgba(0,212,255,0.4)',
+                    'linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent)',
+                  boxShadow: '0 0 12px 4px rgba(255,255,255,0.4)',
                 }}
                 animate={{ top: ['0%', '100%'] }}
                 transition={{
@@ -119,7 +120,7 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
               ].map((cls, i) => (
                 <motion.div
                   key={i}
-                  className={`absolute w-5 h-5 border-[#00d4ff]/60 ${cls}`}
+                  className={`absolute w-5 h-5 border-[#e2e8f0]/60 ${cls}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
@@ -129,7 +130,7 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
 
             {/* Boot text */}
             <motion.div
-              className='mt-8 font-mono text-xs text-[#00d4ff]/70 tracking-[0.2em] uppercase h-4 text-center'
+              className='mt-8 font-mono text-xs text-[#e2e8f0]/70 tracking-[0.2em] uppercase h-4 text-center'
               key={lineIndex}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -147,7 +148,7 @@ export default function RobotLoader({ onComplete }: RobotLoaderProps) {
               </div>
               <div className='h-px bg-[#e2e8f0]/10 overflow-hidden relative'>
                 <motion.div
-                  className='h-full bg-[#00d4ff]'
+                  className='h-full bg-[#e2e8f0]'
                   style={{ width: `${progress}%` }}
                   transition={{ ease: 'linear' }}
                 />

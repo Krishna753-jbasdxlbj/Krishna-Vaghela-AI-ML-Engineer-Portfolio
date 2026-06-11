@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { Shrikhand, Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import PageTransition from '@/components/PageTransition';
@@ -18,9 +18,10 @@ gsap.registerPlugin(
   DrawSVGPlugin
 );
 
-const spaceGrotesk = Space_Grotesk({
+const shrikhand = Shrikhand({
   variable: '--font-display',
   subsets: ['latin'],
+  weight: ['400'],
 });
 const inter = Inter({
   variable: '--font-body',
@@ -75,7 +76,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${shrikhand.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
         <PageTransition />

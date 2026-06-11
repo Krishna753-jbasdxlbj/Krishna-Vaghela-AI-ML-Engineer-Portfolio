@@ -54,7 +54,7 @@ export const getAboutItems = (
   {
     label: 'Location:',
     value: (
-      <Highlighter ref={highlightLocation} color='#00d4ff80' action='box'>
+      <Highlighter ref={highlightLocation} color='#78c2ff' action='box'>
         Mumbai, India
       </Highlighter>
     ),
@@ -70,7 +70,7 @@ export const getAboutItems = (
   {
     label: 'Core stack:',
     value: (
-      <Highlighter ref={highlightTech} color='#7c3aed60' action='highlight'>
+      <Highlighter ref={highlightTech} color='#f278ff8b' action='highlight'>
         PyTorch · LangChain · YOLOv8 · React · Next.js · Supabase
       </Highlighter>
     ),
@@ -85,11 +85,11 @@ export const getHobbies = (
     label: 'Interests:',
     value: (
       <>
-        <Highlighter ref={highlightReading} color='#00d4ff50'>
+        <Highlighter ref={highlightReading} color='#369f36bb'>
           Applied AI/ML
         </Highlighter>
         ,{' '}
-        <Highlighter ref={highlightMovies} color='#7c3aed50'>
+        <Highlighter ref={highlightMovies} color='#ffeb78'>
           computer vision
         </Highlighter>
         , model optimization &amp; scalable deployment

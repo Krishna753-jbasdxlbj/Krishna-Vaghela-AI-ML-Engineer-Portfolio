@@ -1,33 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050810; /* deep navy-black    */
-  --foreground: #e2e8f0; /* off-white          */
-  --accent: #00d4ff;     /* electric cyan      */
-  --accent2: #7c3aed;    /* deep violet        */
-  --surface: #0d1117;    /* card bg            */
-  --border: #1e2a3a;     /* subtle borders     */
-  --muted: #64748b;      /* secondary text     */
+  --background: #171717;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent2: var(--accent2);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
 
-  /* New typographic system */
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
-
-  /* Back-compat: original components use `font-holtwood` / `font-roboto`.
-     Remap them onto the new AI/ML font stack so no component edits are needed. */
+  /* original utilities remapped onto the project font stack */
   --font-holtwood: var(--font-display);
   --font-roboto: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
 @media (max-width: 640px) {
@@ -47,82 +32,17 @@ body {
   overscroll-behavior-y: contain;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171717;
+    --foreground: #ffffff;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* ---------- Neural background decoration (hero) ---------- */
-.neural-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    black 40%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    black 40%,
-    transparent 100%
-  );
-}
-
-.neural-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    circle,
-    rgba(0, 212, 255, 0.1) 0%,
-    transparent 70%
-  );
-  animation: pulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: translateX(-50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.15);
-  }
-}
-
-/* ---------- Particle hover glow ---------- */
-.particle > div {
-  transition: filter 0.3s ease;
-}
-.particle:hover > div {
-  filter: drop-shadow(0 0 8px var(--accent));
-}
-
-/* ---------- Accessibility: reduced motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .neural-glow {
-    animation: none !important;
-  }
 }
